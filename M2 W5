@@ -28,7 +28,8 @@ This code will be able to plot this coming from a csv file, with the aim of show
 the company.
 
 The request comes due to CEO asking the team leader to show the results of one of those business units, that we have to present
-to him,since our team leader is conveniently going on holidays next week.
+to him,since our team leader is conveniently going on holidays next week. The request includes sales evolution, country distribution
+and what deals/products are more popular.
 
 
 The code below will help us for both request, itself will fulfill our team leader request, and the example, will help us with the
