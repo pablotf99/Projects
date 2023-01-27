@@ -1,0 +1,92 @@
+Exercise 1.
+#We import wraps tool#
+from functools import wraps
+#We also import the time#
+import time
+#Creating time function#
+def timer(func):
+    #Introducing now the wraps decorator imported before#
+    @wraps(func)
+   #Here we define the function to calculate the time difference#
+    def wrapper(*args):
+        start_time = time.time();
+        retval = func(*args)
+        #We print the result with some text before#
+        print("the function ends in ", time.time()-start_time, "secs")
+        return retval
+    return wrapper
+#Once done this, and including @timer on top of a function, we will be able to measure its execution time#
+
+
+
+
+Exercise 2.
+
+In this business case we are asked by our Team Leader to create a code plotting some graphs about the Sales evolution
+and distribution among the different variables.
+This code will be able to plot this coming from a csv file, with the aim of showing results of the different business unit in 
+the company.
+
+The request comes due to CEO asking the team leader to show the results of one of those business units, that we have to present
+to him,since our team leader is conveniently going on holidays next week.
+
+
+The code below will help us for both request, itself will fulfill our team leader request, and the example, will help us with the
+presentation to the CEO.
+
+
+#FOR OUR TEAM LEAD#
+
+#We import matplotlib functionality for plotting#
+import matplotlib.pyplot as plt
+#Also pandas for read and arrange the data in csv#
+import pandas as pd
+#We import the file#
+df = pd.read_csv("sales_data_sample.csv")
+#We create the variables from the columns of the file to build the graphs#
+x=df['YEAR_ID']
+y=df['SALES']
+q=df['QTR_ID']
+c=df['COUNTRY']
+d=df['DEALSIZE']
+p=df['PRODUCTLINES']
+#First, we plot a bar chart to see Year and Quarter Sales#
+plt.xlabel('Year', fontsize=18)
+plt.ylabel('Sales', fontsize=16)
+plt.bar(x,y)
+plt.show()
+
+plt.xlabel('Quarter', fontsize=18)
+plt.ylabel('Sales', fontsize=16)
+plt.bar(q,y)
+plt.show()
+#Then we modify it to see Sales per country#
+plt.xlabel('Country', fontsize=18)
+plt.ylabel('Sales', fontsize=16)
+plt.bar(c,y)
+plt.show()
+
+#Finally, we plot 2 pie charts based on sales for dealsize and productlines#
+plt.pie(d, labels=y)
+plt.show()
+plt.pie(p, labels=y)
+plt.show()
+
+#FOR OUR CEO#
+
+We observe a how our turnover increased previous year by nearly 50%, however, this year we see a reduction. This is completelly
+understandable, since at the moment of this report, only data for Q1 and Q2 are available. As we can see in the second bar graph,
+our first quarter sales results were much better than previous year, nearly matching the ones from Q4 2021 (usually the highest
+sales point due to seasonallity), Q2 sales matched the ones from same period previous year.
+
+Based on countries, the US has contributed with more than 3.5M to the total sales during the previous 2.5 years, representing
+nearly the 40% of total. Follows the 'big' european countries (Spain, France, UK and Italy) and also Australia. This countries 
+represent the 74% of our total sales.
+
+Looking to our best sold products in the last graph, we see that Classic cars (39%), Vintage cars (19%) and Motorcycles (12%) are
+the ones getting the highest amount of sales, we would need to further study the profitability of each one if we had costs data.
+Plain, ships and trains dont contibute a lot to our reveneue (19% among those 3).
+
+Finally, this products are mainly sold in Medium sized deals, over 60%, while small ones get 26% and big one 13%.
+Since we have a economy of scale production, it would be interesting to increase the discounts offered in large deals, since our
+profitability would increase (attracting more buyers with it).
